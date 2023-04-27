@@ -211,7 +211,7 @@ const HomePage = (props) => {
                    ref={textEl}
                    style={{marginTop: '70px'}}/>
             <Button btnType="success" clicked={toggleHandlerEvent}>
-                تغییر وضعیت نمایش
+                 تغییر وضعیت نمایش لیست دانش آموزان هر کلاس
             </Button>
             {isLoading? <Spinner/>:
                 <Students
