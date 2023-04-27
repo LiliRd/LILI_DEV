@@ -1,0 +1,58 @@
+.box{
+    width: 60%;
+    margin: 20px auto;
+    border:1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    text-align: center;
+    margin-top: 95px;
+    border-radius: 5px;
+    background-color: blue;
+    color: #fff;
+}
+
+
+.remove-btn {
+    margin-right: 0.5rem;
+}
+
+.item-enter {
+    opacity: 0;
+}
+.item-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+.item-exit {
+    opacity: 1;
+}
+.item-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+}
+
+.slide{
+    animation:mySlide 1s ease-out forwards ;
+}
+
+@keyframes mySlide {
+   0%{
+       transform: translateX(0%);
+   }
+    100%{
+        transform: translateX(60px);
+    }
+}
+
+.flip{
+    animation: myFlip 2s ease-out alternate 2;
+}
+
+
+@keyframes myFlip {
+    from{
+        transform: rotateY(0deg);
+    }
+    to{
+        transform: rotateY(180deg);
+    }
+}

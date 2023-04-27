@@ -1,0 +1,179 @@
+import React, {useState, useEffect,useRef} from 'react';
+import './App.css';
+import Students from './components/students/students';
+import Button from './components/UI/button/button';
+import NewStudent from './components/students/newStudent/newStudent';
+import Toolbar from './containers/header/toolbar/Toolbar';
+import {BrowserRouter,Route,Routes} from 'react-router-dom';
+const App = () => {
+  /*declare list*/
+  const [member, setMember] = useState(
+      [
+        {id: 1, name: "Leila", classNumber: 101, phoneNumber: 123, email: "li_rahmani@yahoo.com"},
+        {id: 2, name: "Adam", classNumber: 101, phoneNumber: 6034, email: "Adam@yahoo.com"},
+        {id: 3, name: "Nesta", classNumber: 202, phoneNumber: 988, email: "Nesta@yahoo.com"},
+        {id: 4, name: "Nina", classNumber: 101, phoneNumber: 555, email: "Nina@yahoo.com"},
+        {id: 5, name: "Pita", classNumber: 203, phoneNumber: 322, email: "Pita@yahoo.com"},
+        {id: 6, name: "Arad", classNumber: 202, phoneNumber: 99, email: "Arad@yahoo.com"}
+      ]
+  )
+
+  const [toggle, setToggle] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [arrayHolder, setArrayHolder] = useState([]);
+  const textEl=useRef(null);
+  useEffect(() => {
+    setArrayHolder(member);
+    // textEl.current.focus();
+  }, []);
+
+
+  const [sName, setSname] = useState('');
+  const [sClassNumber, setSClassNumber] = useState(0);
+  const [sPhoneNumber, setSPhoneNumber] = useState(0);
+  const [sEmail, setSEmail] = useState('');
+
+
+  const nameChangeHandlerEvent = (event, id) => {
+    const index = member.findIndex((s) => {
+      return s.id === id;
+    })
+    const selectedStudent = {...member[index]};
+    selectedStudent.name = event.target.value;
+    console.log(selectedStudent.name);
+    const allStudent = [...member];
+    allStudent[index] = selectedStudent;
+    setMember(allStudent);
+  }
+
+  const classNumberChangeHandlerEvent = (event, id) => {
+    const index = member.findIndex((s) => {
+      return s.id === id;
+    })
+    const selectedStudent = {...member[index]};
+    selectedStudent.classNumber = event.target.value;
+    const allStudent = [...member];
+    allStudent[index] = selectedStudent;
+    setMember(allStudent);
+  }
+
+  const phoneNumberChangeEventHandlerEvent = (event, id) => {
+    const index = member.findIndex((s) => {
+      return s.id === id;
+    })
+    const selectedStudent = {...member[index]};
+    selectedStudent.phoneNumber = event.target.value;
+    const allStudent = [...member];
+    allStudent[index] = selectedStudent;
+    setMember(allStudent);
+  }
+  const emailChangeHandlerEvent = (event, id) => {
+    const index = member.findIndex((s) => {
+      return s.id === id;
+    });
+    const selectedStudent = {...member[index]};
+    selectedStudent.email = event.target.value;
+    const allStudent = [...member];
+    allStudent[index] = selectedStudent;
+    setMember(allStudent);
+  }
+
+  const deleteStudentHandlerEvent = (index) => {
+    const allStudent = [...member];
+    allStudent.splice(index, 1);
+    setMember(allStudent);
+  }
+
+  const toggleHandlerEvent = () => {
+    setToggle(!toggle);
+  }
+
+  const searchBarChangeHandlerEvent = (event) => {
+    const filteredItems = arrayHolder.filter((i) => {
+      const upItem = i.name.toUpperCase();
+      const searchItem = event.target.value.toUpperCase();
+      return upItem.indexOf(searchItem) > -1
+    })
+
+    setMember(filteredItems);
+    setSearchValue(event.target.value);
+  }
+
+  const newNameChangeHandlerEvent = (event) => {
+    setSname(event.target.value);
+  }
+  const newClassNumberChangeHandlerEvent = (event) => {
+    setSClassNumber(event.target.value);
+  }
+
+  const newPhoneNumberChangeHandlerEvent = (event) => {
+    setSPhoneNumber(event.target.value);
+  }
+
+  const newEmailChangeHandlerEvent = (event) => {
+    setSEmail(event.target.value);
+  }
+
+  const addStudentHandlerEvent = () => {
+    const newMembers = [...member];
+    newMembers.push(
+        {id: member.length, name: sName, classNumber: sClassNumber, phoneNumber: sPhoneNumber, email: sEmail});
+    setMember(newMembers);
+    setSname('');
+    setSPhoneNumber(0);
+    setSClassNumber(0);
+    setSEmail('');
+  }
+
+  const clickToScrollHandlerEvent=()=>{
+    window.scrollTo(null,textEl.current.offsetTop)
+  }
+
+  return (
+
+      <BrowserRouter>
+        <div className='App'>
+          <Toolbar/>
+          {/*<NewStudent sName={sName}*/}
+          {/*            sClassNumber={sClassNumber}*/}
+          {/*            sPhoneNumber={sPhoneNumber}*/}
+          {/*            sEmail={sEmail}*/}
+          {/*            newNameChangeHandler={newNameChangeHandlerEvent}*/}
+          {/*            newClassNumberChangeHandler={newClassNumberChangeHandlerEvent}*/}
+          {/*            newPhoneNumberChangeHandler={newPhoneNumberChangeHandlerEvent}*/}
+          {/*            newEmailChangeHandler={newEmailChangeHandlerEvent}*/}
+          {/*            addStudentHandler={addStudentHandlerEvent}*/}
+          {/*/>*/}
+          {/*<input type="text" value={searchValue} onChange={searchBarChangeHandlerEvent} ref={textEl} style={{marginTop:'70px'}}/>*/}
+
+          {/*<Button btnType="success" clicked={toggleHandlerEvent}>*/}
+          {/*  تغییر وضعیت نمایش*/}
+          {/*</Button>*/}
+
+          {/*<Students*/}
+          {/*    studentList={member}*/}
+          {/*    nameChangeHandler={nameChangeHandlerEvent}*/}
+          {/*    classNumberChangeHandler={classNumberChangeHandlerEvent}*/}
+          {/*    phoneNumberChangeEventHandler={phoneNumberChangeEventHandlerEvent}*/}
+          {/*    emailChangeHandler={emailChangeHandlerEvent}*/}
+          {/*    deleteStudentHandler={deleteStudentHandlerEvent}*/}
+          {/*    toggle={toggle}*/}
+          {/*/>*/}
+
+          {/*<Button btnType="danger" clicked={clickToScrollHandlerEvent}>بازگشت به ابتدای صفحه</Button>*/}
+          <Routes>
+            <Route path="/"  element={<h1 style={{marginTop:'70px'}}>you see how route works</h1>}/>
+          </Routes>
+
+
+        </div>
+
+
+      </BrowserRouter>
+
+
+  );
+
+}
+
+export default App;

@@ -1,0 +1,25 @@
+.NewStudentPos{
+    width: 80%;
+    margin: 20px auto;
+    border:1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    text-align: center;
+    margin-top: 65px;
+}
+
+.NewStudentPos label{
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.NewStudentPos input{
+    width: 90%;
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+    box-sizing: border-box;
+    margin: auto;
+}
